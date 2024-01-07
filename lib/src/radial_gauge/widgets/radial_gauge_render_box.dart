@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:gauge_indicator/gauge_indicator.dart';
@@ -211,6 +213,11 @@ class RadialGaugeRenderBox extends RenderShiftedBox {
         );
       } else if (segment.color != null) {
         paint.color = segment.color!;
+      }
+
+      for (var j = 0; j < segment.shadows.length; j++) {
+        canvas.drawShadow(segment.path, segment.shadows[j].color,
+            sqrt(segment.shadows[j].blurRadius), false);
       }
 
       canvas.drawPath(segment.path, paint);
